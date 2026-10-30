@@ -8,11 +8,11 @@ originales: de Liggo solo se toma la idea, no los textos, el logo ni la UI.
 | Capa | Elección | Por qué |
 |---|---|---|
 | App móvil | **Expo (React Native) + TypeScript** | iOS y Android con un solo código. Android es el hueco que deja Liggo |
-| Web | **Next.js** (landing + app web + `/profile`) | SEO para la landing y el mismo lenguaje |
+| Web | **Next.js** (landing + app web + `/profile`) | Es lo que usa Liggo; SEO para landing y guías |
 | Backend | **Supabase** (Auth, Postgres, Storage, Edge Functions) | Rápido de montar; las Edge Functions hacen de proxy al LLM |
 | IA | LLM con visión vía API (p. ej. Claude) | Lee la captura directamente y genera respuestas en JSON |
 | Pagos | **RevenueCat** (iOS/Android) + Stripe (web) | Gestión de suscripciones y pruebas gratis sin pelearse con StoreKit |
-| Analítica | PostHog | Embudos onboarding → paywall → conversión |
+| Analítica | PostHog (feature flags + A/B del paywall) + Sentry | Liggo hace A/B del paywall constantemente |
 
 ## Modelo de datos mínimo
 
@@ -36,12 +36,19 @@ usage_daily(user_id, date, count)
 3. Pedir la salida en JSON estricto con 3-5 respuestas cortas.
 4. Guardar en `generations`. **Borrar la imagen** cuando pasen X horas (privacidad de terceros, RGPD).
 
+## Precios de referencia (Liggo)
+
+- Web (Stripe): 4,99 $/semana · 39,99 $/año.
+- Tienda: 7,99 $/semana · 14,99 $/mes (prueba de 3 días) · 34,99 $/año.
+- Idea: vender más barato en web (sin comisión de Apple) y llevar a los usuarios de TikTok a la web.
+
 ## Fases
 
 1. **Semana 1:** auth, subir captura → 3 respuestas, copiar. Solo web (Next.js + Supabase).
 2. **Semana 2:** tonos, stories, historial, `/profile`.
 3. **Semana 3:** app Expo + RevenueCat + paywall + cuota gratis.
 4. **Semana 4:** analítica, landing, publicación en TestFlight y Play (pruebas internas).
+5. **Growth:** `/descargar` con `source` y detección del navegador de TikTok/IG, guías SEO, página "vs competencia", panel de creadores UGC.
 
 ## Ideas de features propias (diferenciación)
 

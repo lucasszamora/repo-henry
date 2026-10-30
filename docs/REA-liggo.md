@@ -2,105 +2,138 @@
 
 Análisis de la app de referencia para construir un producto propio del mismo tipo.
 
-> **Estado:** primera versión. Solo usa información pública de búsquedas (fichas de App Store y agregadores).
-> El sitio `liggo.love` y `apps.apple.com` estaban bloqueados por la red de la sesión, así que
-> **todavía no se analizó la web real** (rutas, bundle JS, API, flujo de pago). Eso queda en
-> [Pendiente](#pendiente-requiere-acceso-a-liggolove).
+Fuentes: web pública (HTML, `robots.txt`, `sitemap.xml`, bundles JS del frontend, páginas legales)
+y fichas de las tiendas. No se entró a zonas con login ni se consultó su base de datos.
+Revisado el 30-10-2026.
+
+Leyenda: ✅ visto directamente · 🔶 inferido (hay que confirmarlo con cuenta o dentro de la app).
 
 ---
 
-## 1. Qué es (verificado)
+## 1. Qué es
 
-| Dato | Valor | Fuente |
+**Asistente de respuestas con IA para ligar** (no es una app de citas). Subes una captura del chat
+o de una story de Instagram, eliges un estilo y recibe varias respuestas listas para copiar.
+
+| Dato | Valor | |
 |---|---|---|
-| Nombre en App Store | "Liggo: Responder con IA" / "Liggo: Frases para Ligar IA" | App Store `id6751428318` |
-| Categoría real | **Asistente de respuestas con IA para ligar**. No es una app de citas | Ficha de la tienda |
-| Propuesta | Ganar confianza al chatear y ligar; respuestas originales a *stories* para romper el hielo | Ficha de la tienda |
-| Integración | Funciona con Instagram, Tinder, WhatsApp y cualquier app de chat **subiendo capturas de pantalla** | Agregador appshunter |
-| Plataformas | iOS + web (`liggo.love`, con ruta `/profile`) | App Store + usuario |
-| Legal | Términos en `liggo.love/tos` | Ficha de la tienda |
-| Edad | 9+ | Ficha de la tienda |
-| Publicador | Figura como "VIRAL APPS SL" en un listado (sin confirmar) | Búsqueda |
-| Idioma / mercado | Español (España / LATAM) | Textos de la ficha |
-| Reseñas | Muy pocas (de 3 a unas 28 según la tienda) y mezcladas | Tienda |
-
-### Monetización (verificado)
-
-- Gratis con compras dentro de la app, **más anuncios**.
-- Suscripción **Premium**:
-  - Semanal: **7,99 $**
-  - Mensual: **14,99 $** (prueba de 3 días)
-  - Anual: **34,99 $**
-- El precio semanal es caro a propósito para que el anual parezca barato: 34,99 $ al año contra unos 415 $ al año pagando semanal. Es el patrón típico de las apps "viral" con paywall en el onboarding.
+| Eslogan | "Lleva tus conversaciones al siguiente nivel" / "Tu asistente de IA para conquistar" | ✅ |
+| Cifras que publican | 200k+ usuarios, 5M+ respuestas, valoración 4,8 (son cifras de marketing) | ✅ |
+| Plataformas | iOS, Android y web app | ✅ |
+| iOS | App Store `id6751428318` ("Liggo: Respuestas con IA") | ✅ |
+| Android | `com.cupidoai.liggo`, lo que sugiere que la marca interna/empresa es "Cupido AI" | ✅ |
+| Idiomas | Español (principal) e inglés; las páginas de descarga también están en italiano y francés | ✅ |
+| Mercado | España + LATAM; legislación española (AEPD) | ✅ |
+| Edad mínima | 18+ según los TOS (la tienda dice 9+) | ✅ |
+| Contacto | `contacta@liggo.love` | ✅ |
+| Redes | Instagram y TikTok `@liggo.love`; captación por TikTok/UGC | ✅ |
 
 ---
 
-## 2. Mapa de funcionalidades
+## 2. Funcionalidades
 
-Leyenda: ✅ verificado · 🔶 inferido por el tipo de app (comparado con Rizz, YourMove, Plug AI…). Hay que confirmarlo con el análisis de la web.
+### Producto principal
 
-| # | Función | Estado | Descripción |
-|---|---|---|---|
-| F1 | Responder desde captura de pantalla | ✅ | El usuario sube una captura de un chat (IG, Tinder, WA). La IA lee la conversación (OCR o visión) y propone respuestas |
-| F2 | Responder a *stories* | ✅ | Sube una story y la IA genera una respuesta original para abrir conversación |
-| F3 | Frases para ligar / openers | ✅ (por el nombre) | Frases de entrada generadas o de una biblioteca |
-| F4 | Tonos de respuesta | 🔶 | Gracioso, coqueto, atrevido, romántico, serio… |
-| F5 | Varias opciones por petición | 🔶 | Normalmente de 3 a 5 respuestas, con botones de copiar y regenerar |
-| F6 | Contexto manual | 🔶 | Escribir a mano lo que te dijeron, sin captura |
-| F7 | Perfil de usuario (`/profile`) | ✅ (la ruta existe) | Cuenta, suscripción y probablemente preferencias (género, a quién busca, estilo) |
-| F8 | Límite gratis + paywall | 🔶 | X respuestas gratis por día; luego paywall con los 3 planes |
-| F9 | Anuncios | ✅ | Para usuarios gratis (probablemente intersticiales o con recompensa) |
-| F10 | Historial | 🔶 | Conversaciones o respuestas guardadas |
+| Función | Detalle | |
+|---|---|---|
+| **Responder a un chat** | "Sube tu chat": captura → la IA entiende el contexto → varias respuestas | ✅ |
+| **Responder a una story** | "Sube captura de la historia a responder" → openers | ✅ |
+| **5 modos/estilos** | Gracioso · Coquetear · Provocativo (vacilar) · Enamorado · **Salvada Épica** (rescatar un chat muerto) | ✅ |
+| Varias respuestas | "Recibe múltiples respuestas… elige tu favorita"; se pueden editar | ✅ |
+| Respuesta principal + alternativa ("flash") | Visto en el formulario interno de configuración de respuestas | ✅ |
+| Usos más allá de ligar | En el FAQ: "cualquier conversación casual o social" | ✅ |
+
+### Secciones de la web app (rutas privadas, sacadas de `robots.txt` y del bundle)
+
+| Ruta | Qué parece ser | |
+|---|---|---|
+| `/cupido` | El asistente principal ("Cupido") donde se generan respuestas; tiene su propio experimento de paywall | ✅ ruta / 🔶 función |
+| `/practicar` | **Práctica de conversación** con la IA | ✅ ruta / 🔶 función |
+| `/simulador` | **Simulador de práctica**: una función premium según su FAQ ("funciones extra como el simulador de práctica") | ✅ |
+| `/biblioteca` | Biblioteca de frases/openers ("abridores") | 🔶 |
+| `/victorias` | Registro de "victorias" (citas o números conseguidos): gamificación o prueba social | 🔶 |
+| `/profile`, `/settings` | Cuenta, plan, ajustes | ✅ |
+| `/login`, `/register` | Email + contraseña o **Google** | ✅ |
+
+### Back-office interno (rutas `/dashboard-*`)
+
+Te muestra cómo opera el negocio por dentro:
+
+- `dashboard-general`, `-negocio`, `-usuarios`, `-charts`, `-logs`, `-errores`: métricas y operaciones.
+- `dashboard-experimentos`: **A/B tests del paywall** (confirmado: `/api/paywall/mobile-experiment` devuelve variante y flag).
+- `dashboard-abridores` / `dashboard-analyze` / `dashboard-practicar`: curación de prompts, openers y análisis.
+- `dashboard-articulos`: contenido SEO (las guías).
+- `dashboard-influencers/*` (creators, calendar, videos, ranking, requests): **gestión de creadores UGC en TikTok**. Es su motor de adquisición.
+- `dashboard-roadmap`.
 
 ---
 
-## 3. Flujos de usuario (reconstruidos 🔶)
+## 3. Monetización
+
+| Canal | Planes | |
+|---|---|---|
+| Paywall web (Stripe) | **Pro Semanal 4,99 $** · **Pro Anual 39,99 $** ("Mejor Oferta"), con botón "Restaurar Compras" | ✅ |
+| App Store (según listados) | Semanal 7,99 $ · Mensual 14,99 $ (prueba de 3 días) · Anual 34,99 $ | ✅ (de las tiendas) |
+| Gratis | "Empieza gratis, sin tarjeta". Premium = **uso ilimitado** + simulador | ✅ |
+| Cuota | Tabla `usage_tracking` en Supabase, así que hay un límite de usos gratis | ✅ tabla / 🔶 límite |
+| Anuncios | En la app móvil (según la ficha de la tienda) | ✅ |
+
+Los precios son distintos en web y en la tienda (pagar en web evita la comisión de Apple y Google).
+Optimizan el paywall con A/B tests permanentes.
+
+---
+
+## 4. Stack técnico
+
+| Capa | Tecnología | Evidencia |
+|---|---|---|
+| Frontend web | **Next.js (App Router) con Turbopack**, páginas prerenderizadas con ISR | Cabeceras `x-powered-by: Next.js`, `x-nextjs-prerender`, chunks `turbopack-*.js` |
+| Hosting | nginx delante (no es Vercel directo); cabeceras `x-id-fe` de un edge propio | Cabeceras |
+| Auth + DB | **Supabase** (Auth con email y Google OAuth, Postgres) | Bundle y política de privacidad |
+| Tablas vistas | `user_profiles`, `usage_tracking`, RPC `get_user_complete_state` | Bundle |
+| API propia | Rutas de Next: `/api/checkout`, `/api/broadcast`, `/api/cupido/paywall-experiment`, `/api/paywall/mobile-experiment`, `/api/admin/...` | Bundle |
+| Pagos web | **Stripe Checkout** (precios `price_...`) | Bundle y privacidad |
+| Pagos móvil | StoreKit / Play Billing (probablemente vía RevenueCat o similar) | 🔶 |
+| IA | **OpenAI, Anthropic y Google** (multi-proveedor) | Política de privacidad |
+| Errores | **Sentry** | Bundle |
+| Analítica | **DataFast** (datafa.st) + **Google Ads** con conversiones (`AW-18379635978`) | HTML |
+| Animaciones | Lottie (`hero-new.json`) | HTML |
+| Emojis | emoji-datasource-apple (jsDelivr) | Bundle |
+
+**Privacidad (de su política):** las capturas "quedan asociadas a tu cuenta" (las guardan). Usan las
+Cláusulas Contractuales Tipo para transferir datos fuera del EEE. Cookies de Supabase y Stripe como
+imprescindibles; Google Ads con Consent Mode.
+
+---
+
+## 5. Captación (growth)
+
+1. **UGC/influencers en TikTok** con back-office propio para gestionarlos.
+2. **SEO programático**: `/guias/*` (te dejan en visto, respuestas para Tinder, WhatsApp e Instagram) en ES y EN.
+3. **Páginas contra la competencia**: `/liggo-vs-bombiny` y `/alternativa-a-bombiny`. Bombiny es el competidor directo (coach de ligue web, unos 8k usuarios).
+4. **`/descargar?store=ios|android&source=...`**: redirección con seguimiento por origen. Detecta navegadores dentro de apps (TikTok/IG) y enseña "toca los tres puntos → abrir en navegador".
+5. Google Ads con conversión de compra.
+
+---
+
+## 6. Flujo de usuario
 
 ```
-Onboarding (3-5 pantallas: valor → género/preferencias → "¿qué quieres mejorar?")
-   └─► Paywall (prueba de 3 días del plan mensual, con la X de cerrar poco visible)
-          └─► Inicio
-                ├─ [Subir captura] → recorte/confirmación → elegir tono → N respuestas → copiar
-                ├─ [Responder story] → subir imagen → N openers → copiar
-                ├─ [Escribir contexto] → texto → N respuestas
-                └─ Perfil → plan, idioma, preferencias, cerrar sesión, borrar cuenta
+TikTok / Google ─► Landing ─► /descargar ─► App Store / Play
+                        └─► /register (email o Google) ─► web app
+App/web: onboarding ─► paywall (Semanal / Anual "Mejor Oferta", A/B test)
+   └─► Cupido: [subir captura de chat | story] ─► elegir modo (5) ─► N respuestas ─► copiar/editar
+   ├─► Practicar / Simulador (premium): entrenar conversación con IA
+   ├─► Biblioteca de abridores
+   └─► Victorias / Perfil / Ajustes
 ```
 
 ---
 
-## 4. Arquitectura probable (🔶)
+## 7. Oportunidades para tu app
 
-- **Cliente:** app iOS nativa o multiplataforma (React Native/Flutter) + web en `liggo.love`.
-- **IA:** un LLM con visión (lee la captura directamente, sin OCR aparte) y un *prompt* de sistema
-  con tono y persona. Ninguna parte necesita un modelo propio.
-- **Backend:** API ligera (auth, cuota diaria, proxy al LLM para no exponer claves).
-- **Pagos:** StoreKit en iOS (seguramente vía RevenueCat o Adapty) y Stripe en web.
-- **Anuncios:** AdMob o similar.
-
----
-
-## 5. Puntos débiles detectados (tu oportunidad)
-
-1. **Pocas reseñas y valoración baja:** poca retención o calidad de respuesta irregular.
-2. **Anuncios + suscripción cara:** experiencia agresiva; un plan gratis más generoso o un precio único compite bien.
-3. **Solo iOS** (en las tiendas): Android está libre.
-4. **Producto genérico:** cualquier "rizz app" hace lo mismo. Diferenciarse con funciones (ver `PLAN-MVP.md`).
-
----
-
-## Pendiente (requiere acceso a liggo.love)
-
-Cuando el dominio esté permitido en la red de la sesión:
-
-- [ ] Recorrer la web: rutas (`/`, `/profile`, `/tos`, `/privacy`, login, pricing).
-- [ ] Framework (Next.js, Vite, Flutter web…) por HTML, cabeceras y bundle.
-- [ ] Endpoints de API llamados desde el front (auth, generate, billing).
-- [ ] Proveedor de auth (Firebase, Supabase, Clerk…) y de pagos (Stripe o Paddle).
-- [ ] Analítica y SDKs (GA, Meta Pixel, Mixpanel, PostHog…).
-- [ ] Textos reales del onboarding y del paywall; límites del plan gratis.
-- [ ] Leer TOS y política de privacidad (qué hacen con las capturas).
-
-## Fuentes
-
-- https://apps.apple.com/app/id6751428318
-- https://appshunter.io/ios/app/liggo-frases-para-ligar-ia/id6751428318
+1. **Precio y confianza:** guardan las capturas en tu cuenta. Puedes ofrecer "no guardamos tus capturas" como argumento de venta.
+2. **Diferenciar los modos:** sus 5 estilos son genéricos. Puedes añadir "aprende tu estilo", tonos personalizados y respuesta según la etapa de la conversación.
+3. **Coaching + respuesta:** Liggo da respuestas y Bombiny da coaching. Combinar ambos (respuesta + por qué funciona) es un hueco.
+4. **Teclado del móvil:** responder sin salir de Tinder o IG. Ellos no lo tienen.
+5. **Copiar su motor de growth (no su marca):** UGC en TikTok, guías SEO, páginas comparativas y A/B tests del paywall desde el día 1.
