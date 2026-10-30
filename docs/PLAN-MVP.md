@@ -7,7 +7,7 @@ originales: de Liggo solo se toma la idea, no los textos, el logo ni la UI.
 
 | Capa | Elección | Por qué |
 |---|---|---|
-| App móvil | **Expo (React Native) + TypeScript** | iOS y Android con un solo código. Android es el hueco que deja Liggo |
+| App móvil | **Expo (React Native) + TypeScript** | iOS y Android con un solo código (Liggo está en las dos) |
 | Web | **Next.js** (landing + app web + `/profile`) | Es lo que usa Liggo; SEO para landing y guías |
 | Backend | **Supabase** (Auth, Postgres, Storage, Edge Functions) | Rápido de montar; las Edge Functions hacen de proxy al LLM |
 | IA | LLM con visión vía API (p. ej. Claude) | Lee la captura directamente y genera respuestas en JSON |
